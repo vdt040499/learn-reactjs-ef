@@ -1,0 +1,17 @@
+.album {
+    &__thumbnail {
+        & > img {
+            width: 150px;
+            height: 150px;
+
+            border-radius: 5px;
+
+            object-fit: cover;
+        }
+    }
+
+    &__name {
+        font-weight: 500;
+        margin: 0;
+    }
+}
