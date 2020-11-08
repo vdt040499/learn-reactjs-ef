@@ -11,7 +11,8 @@ function TodoFeature(props) {
         {id: 3, title: "Sleep", status: "new"},
     ]
 
-    const [todoList, setTodoList] = useState(initTodoList)
+    const [todoList, setTodoList] = useState(initTodoList);
+    const [filterStatus, setFilterStatus] = useState('all');
 
     const handleTodoClick = (todo, idx) => {
         console.log(todo, idx);
@@ -29,9 +30,30 @@ function TodoFeature(props) {
         setTodoList(newTodoList);
     }
 
+    const handleShowAllClick = () => {
+        setFilterStatus('all');
+    }
+
+    const handleShowCompletedClick = () => {
+        setFilterStatus('completed');
+    }
+
+    const handleShowNewClick = () => {
+        setFilterStatus('new');
+    }
+
+    const renderedTodoList = todoList.filter(todo => filterStatus === 'all' || filterStatus === todo.status);
+
     return (
         <div className="todoFeature">
-            <TodoList todoList={todoList} onTodoClick={handleTodoClick}/>
+            <h3>Todo List</h3>
+            <TodoList todoList={renderedTodoList} onTodoClick={handleTodoClick}/>
+
+            <div>
+                <button onClick={handleShowAllClick}>Show All</button>
+                <button onClick={handleShowCompletedClick}>Show Completed</button>
+                <button onClick={handleShowNewClick}>Show New</button>
+            </div>
         </div>
     );
 }
