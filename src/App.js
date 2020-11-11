@@ -1,9 +1,9 @@
-import { Link, NavLink, Redirect, Route, Switch } from "react-router-dom";
-import "./App.css";
+import { NavLink, Redirect, Route, Switch } from 'react-router-dom';
+import './App.css';
+import NotFound from './components/NotFound';
+import AlbumFeature from './features/Album';
+import TodoFeature from './features/Todo';
 
-import TodoFeature from "./features/Todo";
-import AlbumFeature from "./features/Album";
-import NotFound from "./components/NotFound";
 
 function App() {
   return (
@@ -18,13 +18,13 @@ function App() {
       </p>
 
       <Switch>
-        <Redirect from="/home" to="/" exact/>
+        <Redirect from="/home" to="/" exact />
 
         <Route path="/" component={TodoFeature} exact />
         <Route path="/todos" component={TodoFeature} />
         <Route path="/albums" component={AlbumFeature} />
 
-        <Route component={NotFound}/>
+        <Route component={NotFound} />
       </Switch>
     </div>
   );
