@@ -1,3 +1,4 @@
+import Header from 'components/Header';
 import { useEffect } from 'react';
 import { NavLink, Redirect, Route, Switch } from 'react-router-dom';
 import productApi from './api/productApi';
@@ -23,6 +24,8 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
+      
       <p>
         <NavLink to="/todos" activeClassName="active-menu">
           Todos

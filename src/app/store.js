@@ -1,12 +1,12 @@
-const { configureStore } = require("@reduxjs/toolkit");
 import counterReducer from '../features/Counter/counterSlice';
+const { configureStore } = require('@reduxjs/toolkit');
 
 const rootReducer = {
-    counter: counterReducer,
-}
+  counter: counterReducer,
+};
 
 const store = configureStore({
-    reducer: rootReducer,
+  reducer: rootReducer,
 });
 
 export default store;
