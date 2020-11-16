@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
 import { TextField } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { Controller } from 'react-hook-form';
 
 InputField.propTypes = {
@@ -23,6 +23,8 @@ function InputField(props) {
             control={form.control}
             as={TextField}
 
+            margin="normal"
+            variant="outlined"     
             fullWidth
             label={label}
             disabled={disabled}

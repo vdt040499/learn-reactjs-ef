@@ -1,13 +1,13 @@
 import Header from 'components/Header';
 import { useEffect } from 'react';
-import { NavLink, Redirect, Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import productApi from './api/productApi';
 import './App.css';
-
 import NotFound from './components/NotFound';
 import AlbumFeature from './features/Album';
 import CounterFeature from './features/Counter';
 import TodoFeature from './features/Todo';
+
 
 
 function App() {
@@ -26,15 +26,6 @@ function App() {
     <div className="App">
       <Header />
       
-      <p>
-        <NavLink to="/todos" activeClassName="active-menu">
-          Todos
-        </NavLink>
-      </p>
-      <p>
-        <NavLink to="/albums">Albums</NavLink>
-      </p>
-
       <Switch>
         <Redirect from="/home" to="/" exact />
 
