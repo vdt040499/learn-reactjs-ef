@@ -11,7 +11,27 @@ import * as yup from 'yup';
 import './styles.scss';
 
 const schema = yup.object().shape({
-  
+  fullName: yup
+    .string()
+    .required('Please enter your full name.')
+    .test('should has at least two words', 'Please enter at least two words.', (value) => {
+      return value.split(' ').length >= 2;
+    }),
+
+  email: yup
+    .string()
+    .required('Please enter your email.')
+    .email('Please enter a valid email.'),
+
+  password: yup
+    .string()
+    .required('Please enter your password.')
+    .min(6, 'Please enter at least 6 character.'),
+
+  retypePassword: yup
+    .string()
+    .required('Please retype your password.')
+    .oneOf([yup.ref('password')], 'Password does not match'),
 });
 
 RegisterForm.propTypes = {
