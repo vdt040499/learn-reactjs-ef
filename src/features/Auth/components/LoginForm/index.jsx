@@ -16,10 +16,7 @@ const schema = yup.object().shape({
     .required('Please enter your email.')
     .email('Please enter a valid email.'),
 
-  password: yup
-    .string()
-    .required('Please enter your password.'),
-
+  password: yup.string().required('Please enter your password.'),
 });
 
 LoginForm.propTypes = {
@@ -57,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     top: theme.spacing(1),
     left: 0,
     right: 0,
-  }
+  },
 }));
 
 function LoginForm(props) {
@@ -79,11 +76,11 @@ function LoginForm(props) {
     }
   };
 
-  const {isSubmitting} = form.formState;
+  const { isSubmitting } = form.formState;
 
   return (
     <div className={classes.root}>
-      {isSubmitting && <LinearProgress className={classes.progress}/>}
+      {isSubmitting && <LinearProgress className={classes.progress} />}
 
       <div className={classes.avatar}>
         <img src={fireFly} alt="logo" />

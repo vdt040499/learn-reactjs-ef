@@ -105,7 +105,7 @@ function Header() {
           {mode === MODE.REGISTER && (
             <>
               <Register closeDialog={handleClose} />
-              <Box>
+              <Box style={{textAlign: 'center'}}>
                 <Button color="primary" onClick={() => setMode(MODE.LOGIN)}>Already have an account. Login here</Button>
               </Box>
             </>
