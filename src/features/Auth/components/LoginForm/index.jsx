@@ -11,27 +11,18 @@ import * as yup from 'yup';
 import './styles.scss';
 
 const schema = yup.object().shape({
-  fullName: yup
+  identifier: yup
     .string()
-    .required('Please enter your full name.')
-    .test('should has at least two words', 'Please enter at least two words.', (value) => {
-      return value.split(' ').length >= 2;
-    }),
-
-  email: yup.string().required('Please enter your email.').email('Please enter a valid email.'),
+    .required('Please enter your email.')
+    .email('Please enter a valid email.'),
 
   password: yup
     .string()
-    .required('Please enter your password.')
-    .min(6, 'Please enter at least 6 character.'),
+    .required('Please enter your password.'),
 
-  retypePassword: yup
-    .string()
-    .required('Please retype your password.')
-    .oneOf([yup.ref('password')], 'Password does not match'),
 });
 
-RegisterForm.propTypes = {
+LoginForm.propTypes = {
   onSubmit: PropTypes.func,
 };
 
@@ -66,18 +57,16 @@ const useStyles = makeStyles((theme) => ({
     top: theme.spacing(1),
     left: 0,
     right: 0,
-  },
+  }
 }));
 
-function RegisterForm(props) {
+function LoginForm(props) {
   const classes = useStyles();
 
   const form = useForm({
     defaultValues: {
-      fullName: '',
-      email: '',
+      identifier: '',
       password: '',
-      retypePassword: '',
     },
     resolver: yupResolver(schema),
   });
@@ -90,25 +79,23 @@ function RegisterForm(props) {
     }
   };
 
-  const { isSubmitting } = form.formState;
+  const {isSubmitting} = form.formState;
 
   return (
     <div className={classes.root}>
-      {isSubmitting && <LinearProgress className={classes.progress} />}
+      {isSubmitting && <LinearProgress className={classes.progress}/>}
 
       <div className={classes.avatar}>
         <img src={fireFly} alt="logo" />
       </div>
 
       <Typography className={classes.title} component="h3" variant="h5">
-        Create An Account
+        Sign In
       </Typography>
 
       <form onSubmit={form.handleSubmit(handleSubmit)}>
-        <InputField name="fullName" label="Full Name" form={form} />
-        <InputField name="email" label="Email" form={form} />
+        <InputField name="identifier" label="Email" form={form} />
         <PasswordField name="password" label="Password" form={form} />
-        <PasswordField name="retypePassword" label="Retype Password" form={form} />
 
         <Button
           disabled={isSubmitting}
@@ -118,11 +105,11 @@ function RegisterForm(props) {
           variant="contained"
           color="primary"
         >
-          Create an account
+          Sign in
         </Button>
       </form>
     </div>
   );
 }
 
-export default RegisterForm;
+export default LoginForm;

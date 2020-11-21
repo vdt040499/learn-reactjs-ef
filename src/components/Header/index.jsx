@@ -1,17 +1,18 @@
+import { Box } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import IconButton from '@material-ui/core/IconButton';
 import { makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import { Close } from '@material-ui/icons';
 import classNames from 'classnames';
+import Login from 'features/Auth/components/Login';
 import Register from 'features/Auth/components/Register';
 import fireFly from 'firefly.svg';
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './styles.scss';
 
@@ -38,11 +39,25 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     color: 'white',
   },
+
+  closeButton: {
+    position: 'absolute',
+    top: theme.spacing(1),
+    right: theme.spacing(1),
+    color: theme.palette.grey[500],
+    zIndex: 1,
+  },
 }));
+
+const MODE = {
+  LOGIN: 'login',
+  REGISTER: 'register',
+};
 
 function Header() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [mode, setMode] = useState(MODE.LOGIN);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -70,20 +85,40 @@ function Header() {
           <NavLink className={classes.link} to="/albums">
             <Button color="inherit">Albums</Button>
           </NavLink>
-          <Button color="inherit" onClick={handleClickOpen}>Register</Button>
+          <Button color="inherit" onClick={handleClickOpen}>
+            Register
+          </Button>
         </Toolbar>
       </AppBar>
 
-      <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+      <Dialog
+        disableBackdropClick
+        disableEscapeKeyDown
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <IconButton className={classes.closeButton} onClick={handleClose}>
+          <Close />
+        </IconButton>
         <DialogContent>
-          <Register />
+          {mode === MODE.REGISTER && (
+            <>
+              <Register closeDialog={handleClose} />
+              <Box>
+                <Button color="primary" onClick={() => setMode(MODE.LOGIN)}>Already have an account. Login here</Button>
+              </Box>
+            </>
+          )}
+          {mode === MODE.LOGIN && (
+            <>
+              <Login closeDialog={handleClose} />
+              <Box>
+                <Button color="primary" onClick={() => setMode(MODE.REGISTER)}>Dont have an account. Register here</Button>
+              </Box>
+            </>
+          )}
         </DialogContent>
-        
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
-          </Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
